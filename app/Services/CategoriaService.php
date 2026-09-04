@@ -10,6 +10,14 @@ class CategoriaService{
 
     public function __construct(CategoriaRepository $categoriaRepository) {
         $this->categoria_repository = $categoriaRepository;
-        
+
+    }
+
+    public function listar(){
+        return $this->categoria_repository->listar();
+    }
+
+    public function guardar(array $datos){
+        $this->categoria_repository->guardar($datos);
     }
 }

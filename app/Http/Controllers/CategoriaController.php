@@ -16,18 +16,21 @@ class CategoriaController extends Controller
     
     public function index()
     {
-        //
+        $categorias = $this->categoria_service->listar();
+        return view('Categorias.Index',compact('categorias'));
     }
 
     
-    public function create()
+    public function create() #manda a la ruta crear 
     {
-        
+        return view('Categorias.Create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        
+        $this->categoria_service->guardar($request->all());
+
+        return redirect()->route('categoria.index')->with('success','categorias creada correctamente');#dirijir a la pegina principal 
     }
 
     
