@@ -40,15 +40,17 @@ class CategoriaController extends Controller
     }
 
     
-    public function edit()
+    public function edit(int $id)
     {
-        
+        $categorias=$this->categoria_service->buscarId($id);
+        return  view('Categorias.Edit',compact('categorias'));
     }
 
     
-    public function update()
+    public function update(int $id,Request $request)
     {
-        
+        $this->categoria_service->actualizar($id,$request->all());
+        return redirect()->route('categoria.index')->with('success','actualizada  correctamente');#dirijir a la pegina principal 
     }
 
     

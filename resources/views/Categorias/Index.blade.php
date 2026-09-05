@@ -74,7 +74,7 @@
                         <td class="p-3 text-sm text-au-text-muted">{{$categoria->descripcion }}</td>
                         <td class="p-3 text-sm text-au-text-muted"></td>{{-- cantidad de productos en esa categoria --}}
                         <td class="p-3 text-sm text-au-text-muted">
-                            @if ($categoria->estado == 1 )
+                            @if ($categoria->estado == 1  )
                                 <span class="bg-green-100 text-green-700 text-[10px] font-medium px-2 py-1 rounded-full">
                                     Activa
                                 </span>
@@ -84,7 +84,16 @@
                                 </span>
                             @endif  
                         </td>
-                        <td></td>
+                        <td class="p-3">
+
+                            <div class="flex gap-3 text-au-text-muted">
+
+                                <a href="{{ route ('categoria.edit',$categoria->id)}}">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+
+                            </div>
+                        </td>
                     </tr>
                     
                 @endforeach
