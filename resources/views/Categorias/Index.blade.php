@@ -58,7 +58,7 @@
                         Estado
                     </th>
 
-                    <th class="p-3 text-base font-semibold text-au-brown-dark">
+                    <th class="px-2 py-2 w-24 text-sm font-semibold text-au-brown-dark text-cente">
                         Acciones
                     </th>
 
@@ -74,23 +74,55 @@
                         <td class="p-3 text-sm text-au-text-muted">{{$categoria->descripcion }}</td>
                         <td class="p-3 text-sm text-au-text-muted"></td>{{-- cantidad de productos en esa categoria --}}
                         <td class="p-3 text-sm text-au-text-muted">
-                            @if ($categoria->estado == 1  )
-                                <span class="bg-green-100 text-green-700 text-[10px] font-medium px-2 py-1 rounded-full">
-                                    Activa
-                                </span>
-                            @else
-                                <span class="bg-red-100 text-red-500 text-[10px] font-medium px-2 py-1 rounded-full">
-                                    Inactiva
-                                </span>
-                            @endif  
+                            <form action="{{ route('categoria.canbiarEstado',$categoria->id)}}" method="POST">
+                                @csrf
+                                    <div class="flex gap-3 text-au-text-muted">
+
+                                        <label class="inline-flex items-center gap-3 cursor-pointer">
+
+                                            <div class="relative">
+                                                <input type="hidden" name="estado" value="0">
+                                                <input
+                                                    type="checkbox"
+                                                    name="estado"
+                                                    value="1"
+                                                    class="sr-only peer"
+                                                    onchange="this.form.submit()"  {{-- canbiar a un botoon --}}
+                                                    {{ $categoria->estado ==1 ? 'checked':'' }}>
+
+                                                <div class="w-11 h-6 bg-au-cream-border rounded-full peer-checked:bg-au-coral transition-all"></div>
+
+                                                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-5"></div>
+                                            </div>
+                                            @if ($categoria->estado == 1  )
+                                                <span class="bg-green-100 text-green-700 text-[10px] font-medium px-2 py-1 rounded-full">
+                                                    Activa
+                                                </span>
+                                            @else
+                                                <span class="bg-red-100 text-red-500 text-[10px] font-medium px-2 py-1 rounded-full">
+                                                    Inactiva
+                                                </span>
+                                            @endif
+                                        </label>
+                                    </div>
+                            </form>
                         </td>
                         <td class="p-3">
 
-                            <div class="flex gap-3 text-au-text-muted">
+                            <div class="flex justify-center text-au-text-muted items-center gap-2 ">
 
                                 <a href="{{ route ('categoria.edit',$categoria->id)}}">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
+
+                                <form action="{{ route('categoria.destroy',$categoria->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-900 p-1" title="Eliminar">
+                                        <i class="fa-regular fa-trash-can text-lg"></i>
+                                    </button>
+                                
+                                </form>
 
                             </div>
                         </td>

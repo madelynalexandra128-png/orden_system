@@ -6,3 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('categoria',CategoriaController::class);
+Route::post('/categoria/cambiarEstado/{id}',[CategoriaController::class, 'cambiar'])->name('categoria.canbiarEstado');
