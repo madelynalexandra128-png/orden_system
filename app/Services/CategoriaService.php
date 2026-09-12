@@ -6,34 +6,34 @@ use App\Repositories\CategoriaRepository;
 
 class CategoriaService{
 
-    private CategoriaRepository $categoriarepository;
+    private CategoriaRepository $categoriaRepository;
 
     public function __construct(CategoriaRepository $categoriaRepository) {
-        $this->categoriarepository = $categoriaRepository;
+        $this->categoriaRepository = $categoriaRepository;
 
     }
 
     public function listar(){
-        return $this->categoriarepository->listar();
+        return $this->categoriaRepository->listar();
     }
 
     public function guardar(array $datos){
-        return $this->categoriarepository->guardar($datos);
+        return $this->categoriaRepository->guardar($datos);
     }
 
     public function buscarId(int $id){
-        return $this->categoriarepository->buscarId($id);
+        return $this->categoriaRepository->buscarId($id);
     }
 
     public function actualizar(int $id, array $datos){
-        return $this->categoriarepository->actualizar($id,$datos);
+        return $this->categoriaRepository->actualizar($id,$datos);
     }
 
     public function eliminar(int $id){
-        return $this->categoriarepository->eliminar($id);
+        return $this->categoriaRepository->eliminar($id);
     }
 
     public function canbiar (int $id ){
-        return $this->categoriarepository->cambiar($id);
+        return $this->categoriaRepository->cambiar($id);
     }
 }
