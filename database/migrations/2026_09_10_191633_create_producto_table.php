@@ -18,9 +18,9 @@ return new class extends Migration
             $table->decimal('precio');
             $table->decimal('precioCompra');
             $table->integer('stock');
-            $table->string('estado');
+            $table->boolean('estado');
             $table->integer('puntos');
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
 
 
             $table->unsignedBigInteger('idCategoria');

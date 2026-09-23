@@ -12,7 +12,7 @@
         <span class="text-au-brown-darkest">editar categoría</span>{{-- eesto es como que diga categoria/nueva categoria ubicandoo donde estamso  --}}
     </div>
 
-    <h1 class="text-xl font-bold text-au-brown-darkest mb-6">Crear categoría</h1>
+    <h1 class="text-xl font-bold text-au-brown-darkest mb-6">Editar categoría</h1>
 
     <div class="flex justify-center">
         <div class="w-full max-w-xl bg-white rounded-x1 border-b-au-brown-dark p-8">

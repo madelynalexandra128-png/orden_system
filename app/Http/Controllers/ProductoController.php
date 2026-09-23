@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\producto;
+use App\Services\CategoriaService;
 use App\Services\ProductoService;
 use Illuminate\Http\Request;
 
@@ -10,10 +11,12 @@ class ProductoController extends Controller
 {
 
     private ProductoService $productoService;
+    private CategoriaService $categoriaService;
 
-    public function __construct(ProductoService $productoService) {
+    public function __construct(ProductoService $productoService , CategoriaService $categoriaService) {
 
         $this->productoService = $productoService;
+        $this->categoriaService = $categoriaService;
 
     }
     
@@ -26,12 +29,17 @@ class ProductoController extends Controller
 
     public function create()
     {
-        
+        $categoria = $this->categoriaService->listar();
+        return view('Productos.Create',compact('categoria'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $datos['imagen'] = $request->file('imagen');
         
+        $this->productoService->guardarProducto($request->all());
+
+        return redirect()->route('producto.index');
     }
 
 
@@ -48,9 +56,16 @@ class ProductoController extends Controller
     }
 
     
-    public function update()
+    public function update(int $id, Request $request)
     {
-        
+        $this->productoService->actualizarProducto($id,$request->all());
+
+        return redirect()->route('producto.index');
+    }
+
+    public function estado()
+    {
+
     }
 
 

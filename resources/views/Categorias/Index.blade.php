@@ -58,7 +58,7 @@
                         Estado
                     </th>
 
-                    <th class="px-2 py-2 w-24 text-sm font-semibold text-au-brown-dark text-cente">
+                    <th class="px-2 py-2 w-24 text-base font-semibold text-au-brown-dark text-cente">
                         Acciones
                     </th>
 
