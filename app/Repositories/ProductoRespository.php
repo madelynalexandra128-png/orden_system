@@ -14,7 +14,10 @@ class ProductoRespository{
         return  producto::create($datos);
     }
 
-    
+    public function buscarIdProducto(int $id){
+        $productos=producto::findOrFail ($id);
+        return $productos;
+    }
 
 
     public function actualizarProducto(int $id, array $datos)
@@ -24,7 +27,25 @@ class ProductoRespository{
         return $productos;
     }
 
+    public function cambiarEstadoProducto(int $id){
+        $productos=producto::findOrFail ($id);
+        if($productos->estado == 1){
+            $productos->estado = 0;
+            $mensaje = "Producto desactivado";
+        }else{
+            $productos->estado = 1;
+            $mensaje = "Producto Activado";
+        }
+        $productos->save();
+        return $mensaje;
+    }
 
 
-
+    public function eliminarProducto(int $id){
+        producto::destroy($id);
+    }
 }
+
+
+
+

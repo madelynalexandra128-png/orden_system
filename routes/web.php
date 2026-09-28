@@ -13,3 +13,4 @@ Route::post('/categoria/cambiarEstado/{id}',[CategoriaController::class, 'cambia
 
 //producto
 Route::resource('/producto',ProductoController::class);
+Route::post('/producto/cambiarEstadoProducto/{id}',[ProductoController::class,'cambiarEstadoProducto'])->name('producto.canbiarEstadoProducto');

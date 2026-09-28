@@ -36,7 +36,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $datos['imagen'] = $request->file('imagen');
-        
+
         $this->productoService->guardarProducto($request->all());
 
         return redirect()->route('producto.index');
@@ -50,27 +50,36 @@ class ProductoController extends Controller
 
 
 
-    public function edit()
+    public function edit(int $id)
     {
         
+        $categoria = $this->categoriaService->listar();
+        $productos = $this->productoService->buscarIdProducto($id);
+
+        return view('Productos.Edit', compact('productos','categoria')) ;
     }
 
     
     public function update(int $id, Request $request)
     {
+        $datos = $request->all();
+        $datos['imagen'] = $request->file('imagen'); // puede ser null
+
         $this->productoService->actualizarProducto($id,$request->all());
 
         return redirect()->route('producto.index');
     }
 
-    public function estado()
-    {
-
+    public function cambiarEstadoProducto(int $id){
+        $mensaje = $this->productoService->cambiarEstadoProducto($id);
+        return redirect()->route('producto.index')->with('success', $mensaje); 
     }
 
 
-    public function destroy()
+    public function destroy(int $id)
     {
-        
+        $this->productoService->eliminarProducto($id);
+
+        return redirect()->route('producto.index');
     }
 }

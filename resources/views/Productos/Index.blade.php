@@ -120,7 +120,7 @@
                         </td>
                         
                         <td class="p-3 text-sm text-au-text-muted">
-                            <form action="" method="POST">
+                            <form action="{{ route('producto.canbiarEstadoProducto',$producto->id) }}" method="POST">
                                 @csrf
                                     <div class="flex gap-3 text-au-text-muted">
 
@@ -157,11 +157,11 @@
 
                             <div class="flex justify-center text-au-text-muted items-center gap-2 ">
 
-                                <a href="">
+                                <a href="{{ route('producto.edit',$producto->id) }}">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
 
-                                <form action="" method="POST">
+                                <form action="{{ route('producto.destroy',$producto->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900 p-1" title="Eliminar">
