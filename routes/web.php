@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
@@ -14,3 +15,6 @@ Route::post('/categoria/cambiarEstado/{id}',[CategoriaController::class, 'cambia
 //producto
 Route::resource('/producto',ProductoController::class);
 Route::post('/producto/cambiarEstadoProducto/{id}',[ProductoController::class,'cambiarEstadoProducto'])->name('producto.canbiarEstadoProducto');
+
+//cliente 
+Route::resource('/cliente',ClienteController::class);

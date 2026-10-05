@@ -66,7 +66,29 @@
                 Producto
             </span>
                     
+        </a>
+    
 
+        {{-- cliente --}}
+
+        <a href="{{ route('cliente.index') }}"
+            class="mb-2 flex items-center gap-3 px-3 py-2.5 rounded-lg capitalize transition-all 
+                {{ request()->routeIs('cliente.index') 
+                            ?
+                                ' bg-au-cream-card text-au-coral-text'
+                            :  
+                                'text-au-cream hover:bg-au-text-muted'}}">
+            
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <circle cx="9" cy="8" r="3.5"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.5v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.5 4.6a3.5 3.5 0 010 6.8"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 19.5v-1a4 4 0 00-3-3.87"/>
+                </svg>
+            <span x-show="sidebarOpen" x-transition>
+                cliente
+            </span>
+                    
         </a>
     </nav>
 </aside>
