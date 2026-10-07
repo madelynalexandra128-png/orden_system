@@ -67,6 +67,23 @@
             </span>
                     
         </a>
+
+        <a href="{{ route('mesa.index')}}"
+        class="mb-2 flex items-center gap-3 px-3 py-2.5 rounded-lg capitalize transition-all 
+        {{ request()->routeIs('mesa.index')
+                                ?
+                                ' bg-au-cream-card text-au-coral-text'
+                            :  
+                                'text-au-cream hover:bg-au-text-muted'}}" >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <rect x="3" y="6" width="18" height="3" rx="1" stroke-linecap="round" stroke-linejoin="round"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.5 9v10M18.5 9v10M5.5 13h13"/>
+            </svg>{{-- icono mesa --}}
+
+            <span x-show="sidebarOpen" x-transition>
+                Mesas
+            </span>
+        </a>
     
 
         {{-- cliente --}}

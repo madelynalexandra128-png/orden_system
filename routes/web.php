@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,7 @@ Route::post('/producto/cambiarEstadoProducto/{id}',[ProductoController::class,'c
 
 //cliente 
 Route::resource('/cliente',ClienteController::class);
+
+//mesas
+
+Route::resource('/mesa',MesaController::class);
