@@ -17,4 +17,9 @@ class cliente extends Model
         'puntos',
 
     ];
+
+    public function factura(){
+        return $this->hasMany(factura::class);
+    }
 }
+

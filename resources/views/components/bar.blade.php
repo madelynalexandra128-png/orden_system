@@ -84,6 +84,24 @@
                 Mesas
             </span>
         </a>
+
+
+        <a href="{{ route('factura.index')}}"
+        class="mb-2 flex items-center gap-3 px-3 py-2.5 rounded-lg capitalize transition-all 
+        {{ request()->routeIs('factura.index')
+                                ?
+                                ' bg-au-cream-card text-au-coral-text'
+                            :  
+                                'text-au-cream hover:bg-au-text-muted'}}" >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 3h12a1 1 0 011 1v17l-3-2-2 2-2-2-2 2-2-2-3 2V4a1 1 0 011-1z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 8h6M9 12h6M9 16h3"/>
+            </svg>{{-- icono factura --}}
+
+            <span x-show="sidebarOpen" x-transition>
+                Factura
+            </span>
+        </a>
     
 
         {{-- cliente --}}

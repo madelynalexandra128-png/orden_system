@@ -14,4 +14,8 @@ class mesa extends Model
         'estado',
         'codigoQr'
     ];
+
+    public function factura(){
+        return $this->hasMany(factura::class);
+    }
 }

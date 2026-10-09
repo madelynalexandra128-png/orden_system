@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ProductoController;
@@ -23,3 +24,6 @@ Route::resource('/cliente',ClienteController::class);
 //mesas
 
 Route::resource('/mesa',MesaController::class);
+
+//factura
+Route::resource('/factura',FacturaController::class);
