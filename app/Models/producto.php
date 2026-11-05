@@ -23,4 +23,8 @@ class producto extends Model
     public function categoria(){
         return $this->belongsTo(categoria::class, 'idCategoria');
     }
+
+    public function detalleFactura(){
+        return $this->hasMany(detalleFactura::class,'idProducto');
+    }
 }

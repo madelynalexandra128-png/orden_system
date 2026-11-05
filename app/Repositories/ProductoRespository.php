@@ -44,6 +44,10 @@ class ProductoRespository{
     public function eliminarProducto(int $id){
         producto::destroy($id);
     }
+
+    public function contarActivo(){
+        return producto::where('estado',true)->count();
+    }
 }
 
 

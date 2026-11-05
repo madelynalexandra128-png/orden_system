@@ -13,9 +13,17 @@ class FacturaRepository {
         return $facturas;
     }
 
-    public function guardarFactura(array $dados)
+    public function guardarFactura(array $datos)
     {
-        factura::create($dados);
+        $productos= $datos['productos'];
+
+        unset($datos['productos']);
+
+        $facturas= factura::create($datos);
+
+        foreach($productos as $datoProducto){
+            $facturas->detalleFactura()->create($datoProducto);
+        }
     }
 
     public function buscasrIdFactura(int $id)
@@ -25,10 +33,10 @@ class FacturaRepository {
 
     }
 
-    public function actualizarFactura(int $id, array $dados)
+    public function actualizarFactura(int $id, array $datos)
     {
         $facturas=factura::findOrFail($id);
-        $facturas->update($dados);
+        $facturas->update($datos);
         return $facturas;
     }
 

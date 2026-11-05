@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoriaStoreRequest;
+use App\Http\Requests\CategoriaUpdateRequest;
 use App\Models\categoria;
 use App\Services\CategoriaService;
 use Illuminate\Http\Request;
@@ -17,7 +19,8 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = $this->categoriaService->listar();
-        return view('Categorias.Index',compact('categorias'));
+        $contar=$this->categoriaService->contarActivo();
+        return view('Categorias.Index',compact('categorias','contar'));
     }
 
     
@@ -26,9 +29,9 @@ class CategoriaController extends Controller
         return view('Categorias.Create');
     }
 
-    public function store(Request $request)
+    public function store(CategoriaStoreRequest $request)
     {
-        $this->categoriaService->guardar($request->all());
+        $this->categoriaService->guardar($request->validated());
 
         return redirect()->route('categoria.index')->with('success','categorias creada correctamente');#dirijir a la pegina principal 
     }
@@ -47,9 +50,9 @@ class CategoriaController extends Controller
     }
 
     
-    public function update(int $id,Request $request)
+    public function update(int $id,CategoriaUpdateRequest $request)
     {
-        $this->categoriaService->actualizar($id,$request->all());
+        $this->categoriaService->actualizar($id,$request->validated());
         return redirect()->route('categoria.index')->with('success','actualizada  correctamente');#dirijir a la pegina principal 
     }
 

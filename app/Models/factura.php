@@ -24,4 +24,8 @@ class factura extends Model
     public function mesa(){
         return $this->belongsTo(mesa::class,'idMesa');
     }
+
+    public function detalleFactura(){
+        return $this->hasMany(detalleFactura::class,'idFactura');
+    }
 }

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('title')
     Editar categoria
 @endsection
@@ -34,6 +34,9 @@
                         value="{{$categorias->nombre}}"
                         placeholder="Ej: Bebidas Frias"{{--  ejemplo de que escribir  --}}
                         class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
+                        @error('nombre')
+                            <p class="text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
 
@@ -52,7 +55,10 @@
                         value="{{$categorias->descripcion}}"
                         placeholder="Ej: Espresso, latte, capuchino"{{--  ejemplo de que escribir  --}}
                         class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
-                        ></input>
+                        >
+                        @error('descripcion')
+                            <p class="text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
 

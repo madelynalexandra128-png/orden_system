@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('title')
         Productos
@@ -35,6 +35,9 @@
                         value="{{$productos->nombre}}"{{-- valor anterio --}}
                         placeholder="Ej: cafe "{{--  ejemplo de que escribir  --}}
                         class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
+                        @error('nombre')
+                            <p class="text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
 
@@ -54,6 +57,9 @@
                         placeholder="Ej:Café 100% colombiano, café molido y notas aromáticas naturales de vainilla."{{--  ejemplo de que escribir  --}}
                         class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
                         >
+                        @error('descripcion')
+                            <p class="text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <div class="flex justify-between items-center w-full mb-6 gap-4">
@@ -76,6 +82,10 @@
                                 placeholder=" 5000"
                                 class="w-full pl-6 pr-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
                             >
+                            @error('precioCompra')
+                            <p class="text-red-600">{{ $message }}</p>
+                            @enderror
+
                         </div>
 
                     </div>
@@ -99,6 +109,9 @@
                                 placeholder="8000"
                                 class="w-full pl-6 pr-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
                             >
+                            @error('precio')
+                            <p class="text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -123,6 +136,9 @@
                             min="0"  
                             class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
                         >
+                            @error('stock')
+                            <p class="text-red-600">{{ $message }}</p>
+                            @enderror
 
                     </div>
 
@@ -144,6 +160,10 @@
                             min="0"
                             class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
                         >
+                        @error('puntos')
+                            <p class="text-red-600">{{ $message }}</p>
+                        @enderror
+
 
                     </div>
 
@@ -172,35 +192,7 @@
 
 
                     <div class="w-1/2">
-                        <label class="block text-ms font-semibold text-au-brown-darkest mb-2">
-                            Estado
-                        </label>
-
-                        <label class="inline-flex items-center gap-3 cursor-pointer">
-
-                            <div class="relative">
-                                <input type="hidden" name="estado" value="0">
-                                <input
-                                    type="checkbox"
-                                    name="estado"
-                                    value="1"
-                                    class="sr-only peer"
-                                    {{ $productos->estado == 1 ? 'checked' : '' }}>
-
-                                <div class="w-11 h-6 bg-au-cream-border rounded-full peer-checked:bg-au-coral transition-all"></div>
-
-                                <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-5"></div>
-
-
-                                <span class="ml-3 text-sm text-au-brown-darkest peer-checked:hidden">
-                                    Inactiva
-                                </span>
-                                <span class="ml-3 text-sm text-au-brown-darkest hidden peer-checked:inline">
-                                    Activa
-                                </span>
-                            </div>
-                            
-                        </label>
+                        <input type="hidden" name="estado" value="0">            
                     </div>
                 </div>
 

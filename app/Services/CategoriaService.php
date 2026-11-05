@@ -36,4 +36,8 @@ class CategoriaService{
     public function canbiar (int $id ){
         return $this->categoriaRepository->cambiar($id);
     }
+
+    public function contarActivo(){
+        return $this->categoriaRepository->contarActivo();
+    }
 }

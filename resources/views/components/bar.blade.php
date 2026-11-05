@@ -34,10 +34,7 @@
                                 ' bg-au-cream-card text-au-coral-text'
                             :  
                                 'text-au-cream hover:bg-au-text-muted'}}" >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.59 13.41L13.41 20.59a2 2 0 01-2.82 0L3.41 13.41A2 2 0 013 12V5a2 2 0 012-2h7a2 2 0 011.41.59l7.18 7.18a2 2 0 010 2.82z"/>
-                <circle cx="7.5" cy="7.5" r="1" fill="currentColor"/>
-            </svg>{{-- icono --}}
+        <x-lucide-tags class="w-6 h-6"/>
 
             <span x-show="sidebarOpen" x-transition>
                 Categoria

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductoStoreRequest;
+use App\Http\Requests\ProductoUpdateRequest;
 use App\Models\producto;
 use App\Services\CategoriaService;
 use App\Services\ProductoService;
@@ -23,7 +25,8 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = $this->productoService->listarProductos();
-        return view('Productos.Index',compact('productos'));
+        $contar=$this->productoService->contarActivo();
+        return view('Productos.Index',compact('productos','contar'));
     }
 
 
@@ -33,11 +36,11 @@ class ProductoController extends Controller
         return view('Productos.Create',compact('categoria'));
     }
 
-    public function store(Request $request)
+    public function store(ProductoStoreRequest $request)
     {
         $datos['imagen'] = $request->file('imagen');
 
-        $this->productoService->guardarProducto($request->all());
+        $this->productoService->guardarProducto($request->validated());
 
         return redirect()->route('producto.index');
     }
@@ -60,12 +63,12 @@ class ProductoController extends Controller
     }
 
     
-    public function update(int $id, Request $request)
+    public function update(int $id, ProductoUpdateRequest $request)
     {
         $datos = $request->all();
         $datos['imagen'] = $request->file('imagen'); // puede ser null
 
-        $this->productoService->actualizarProducto($id,$request->all());
+        $this->productoService->actualizarProducto($id,$request->validated());
 
         return redirect()->route('producto.index');
     }

@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Storage;
 class ProductoService{
 
     private ProductoRespository $productorespository;
+    private CategoriaService $categoriaservice;
 
-    public function __construct(ProductoRespository $productoRespository) {
+    public function __construct(ProductoRespository $productoRespository, CategoriaService $categoriaservice) {
 
         $this->productorespository =$productoRespository;
+        $this->categoriaservice= $categoriaservice;
     }
 
 
@@ -23,11 +25,12 @@ class ProductoService{
         $imagen = $datos['imagen'] ?? null;
         unset($datos['imagen']); //no manda la imagen
 
+        $datos['estado'] = $this->estado($datos['stock'], $datos['idCategoria']);
         $producto = $this->productorespository->guardarProductos($datos);
 
         if($imagen){
 
-            $extension = $imagen->getClientOriginalExtension();  #extemsion jpn o png
+            $extension = $imagen->extension();  #extemsion jpn o png
             $nombreImagen = $producto->id . '.' . $extension;
             $imagen->storeAs( 
                 'img', $nombreImagen, 'public'
@@ -57,7 +60,7 @@ class ProductoService{
                 Storage::disk('public')->delete($producto->imagen);
             }
 
-            $extension = $imagen->getClientOriginalExtension();  #extemsion jpn o png
+            $extension = $imagen->extension();  #extemsion jpn o png
             $nombreImagen = $producto->id . '.' . $extension;
             $imagen->storeAs( 
                 'img', $nombreImagen, 'public'
@@ -66,6 +69,7 @@ class ProductoService{
             $this->productorespository->actualizarProducto($producto->id,['imagen' => 'img/' . $nombreImagen]);
 
         }
+        $datos['estado'] = $this->estado($datos['stock'], $datos['idCategoria']);
         return $this->productorespository->actualizarProducto($id,$datos);
     }
 
@@ -80,6 +84,27 @@ class ProductoService{
             Storage::disk('public')->delete($producto->imagen);
             }
         return $this->productorespository->eliminarProducto($id);
+
+    }
+
+    public function contarActivo(){
+        return $this->productorespository->contarActivo();
+    }
+
+
+    private function estado(int $stock, int $idCategoria): bool
+    {
+        $categoria = $this->categoriaservice->buscarId($idCategoria);
+
+        if ($categoria->estado == 0){
+            return false;
+        }
+        if ($stock <= 5) {
+            return false;
+        } 
+
+        return true;
+
 
     }
 

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('title')
     Crear factura
@@ -17,7 +17,7 @@
     <div class="flex justify-center">
         <div class="w-full max-w-xl bg-white rounded-x1 border-b-au-brown-dark p-8">
             
-            <form action ="{{ route('factura.update',$factura->id) }} "method='POST'>
+            <form action ="{{ route('factura.update',$facturas->id) }} "method='POST'>
                 @csrf
                 @method('PUT')
 
@@ -31,7 +31,7 @@
                     <select  
                             id="idCliente"
                             name="idCliente"
-                            value= "{{ $factura->cliente }}"
+                            value= "{{ $facturas->cliente }}"
                             class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
 
                                 @foreach ($clientes as $cliente)
@@ -54,7 +54,7 @@
                     <select  
                             id="idMesa"
                             name="idMesa"
-                            value="{{ $factura->idMesa }}"
+                            value="{{ $facturas->idMesa }}"
                             class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
 
                                 @foreach ($mesas as $mesa)
@@ -77,7 +77,7 @@
                         type="text" 
                         id="metodoPago" 
                         name="metodoPago"
-                        value="{{ $factura->metodoPago }}"
+                        value="{{ $facturas->metodoPago }}"
                         class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
                 </div>
 
@@ -92,7 +92,7 @@
                         type="text" 
                         id="estado" 
                         name="estado"
-                        value="{{ $factura->estado }}"
+                        value="{{ $facturas->estado }}"
                         class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
                 </div>
 
@@ -108,7 +108,7 @@
                         type="date" 
                         id="fecha" 
                         name="fecha"
-                        value="{{ $factura->fecha }}"
+                        value="{{ $facturas->fecha }}"
                         class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
                 </div>
 
@@ -125,7 +125,7 @@
                                 type="number" 
                                 id="total" 
                                 name="total" 
-                                value="{{ $factura->total }}"
+                                value="{{ $facturas->total }}"
                                 class="w-full pl-6 pr-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
                             >
                         </div>
@@ -136,7 +136,7 @@
                 <hr class="border-au-cream-border mb-6">
 
                 <div class="flex items-center justify-end gap-3 pt-4">
-                    <a href="{{ route('producto.index') }}"
+                    <a href="{{ route('factura.index') }}"
                         class="px-5 py-2.5 rounded-lg border border-au-cream-border bg-au-cream text-sm font-medium text-au-brown-darkest hover:bg-au-cream-border transition-all">
                         Cancelar
                     </a>

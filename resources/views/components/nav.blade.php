@@ -20,13 +20,6 @@
 
     <div class="flex items-center gap-4 "> {{-- agregar elementos  --}}
 
-        {{-- barra de búsqueda --}}
-        <div class="relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-au-text-muted"></i>
-            <input type="search" placeholder="Buscar"
-            class="pl-9 pr-4 py-2 w-56 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
-        </div>
-
         {{-- campana --}}
         <button class="relative">
             <i class="fa-regular fa-bell text-au-text-muted text-lg"></i>

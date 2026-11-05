@@ -6,7 +6,7 @@ use App\Models\categoria;
 class CategoriaRepository{
 
     public function listar(){
-        return categoria::all();
+        return categoria::with('producto')->withCount(['producto as contarproducto'])->get();
     }
 
     public function guardar(array $datos){
@@ -39,8 +39,30 @@ class CategoriaRepository{
             $mensaje = "categoria activada";
         }
 
-         $categoria->save(); // save=guardar en ingles 
+        $categoria->save();
+        $this->actualizarEstadoProductos($categoria);  // save=guardar en ingles 
         return $mensaje;
     }
 
+    private function actualizarEstadoProductos($categoria){
+
+    foreach($categoria->producto as $producto){
+
+        if($categoria->estado == 0){
+            $producto->estado = 0;
+        }
+        else if($producto->stock > 5){
+            $producto->estado = 1;
+        }
+        else{
+            $producto->estado = 0;
+        }
+
+        $producto->save();
+    }
+    }
+
+    public function contarActivo(){
+        return categoria::where('estado',true)->count();
+    }
 }
