@@ -6,6 +6,121 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-au-brown-dark: #5C3A2E;
+    --color-au-brown-darkest: #3A2419;
+    --color-au-coral: #E0725A;
+    --color-au-coral-text: #3A150B;
+    --color-au-cream: #F7F0E4;
+    --color-au-cream-border: #ECDFC9;
+    --color-au-cream-card: #F0E0CF;
+    --color-au-text-muted: #8A7362;   
+}
+
+
+@layer components {
+    /* Contenedor: ocupa todo el ancho y hace scroll horizontal en pantallas pequeñas */
+    .dt-container {
+        @apply w-full text-sm text-au-brown-darkest sm:text-base;
+    }
+
+    
+
+    /* La tabla va dentro de una tarjeta con borde, esquinas redondeadas y sombra */
+    .dt-container .dt-layout-row:has(table) {
+        @apply block overflow-x-auto rounded-xl border border-au-cream-border bg-white p-0 shadow-sm;
+    }
+
+    .dt-container .dt-layout-row:has(.dt-search) {
+        @apply flex flex-col items-stretch justify-between gap-3 py-3
+        sm:flex-row-reverse sm:items-center sm:gap-4;
+    }
+    .dt-container .dt-layout-row:has(.dt-paging) {
+        @@apply flex flex-col items-stretch justify-between gap-3 py-3
+        sm:flex-row sm:items-center sm:gap-4;
+    }
+
+    .dt-container .dt-search,
+    .dt-container .dt-length {
+        @apply flex flex-wrap items-center gap-2 text-au-text-muted;
+    }
+
+    /* Buscador y selector de cantidad: fondo crema */
+    .dt-container .dt-search input,
+    .dt-container .dt-length select {
+        @apply w-full rounded-lg border  border-au-cream-border bg-white px-4 py-2.5
+        text-sm text-au-brown-darkest outline-none transition-all sm:w-auto;
+    }
+
+    .dt-container .dt-search input {
+        @apply sm:w-72;
+    }
+
+    .dt-container .dt-search input:hover,
+    .dt-container .dt-length select:hover {
+        @apply bg-au-cream-card;
+    }
+
+    .dt-container .dt-search input:focus,
+    .dt-container .dt-length select:focus {
+        @apply border-au-coral bg-white ring-2 ring-au-coral/30;
+    }
+
+    /* Tabla: grande, ancho completo y fondo blanco */
+    .dt-container table.dataTable {
+        @apply w-full min-w-[640px] border-collapse bg-white text-left;
+    }
+
+    .dt-container table.dataTable thead th {
+        @apply border-b border-au-cream-border bg-au-cream-card px-5 py-4 font-semibold text-black;
+    }
+
+    .dt-container table.dataTable tbody td {
+        @apply border-t border-au-cream-border bg-white px-5 py-4 text-black
+               transition-colors;
+    }
+
+    /* Al pasar el mouse por una fila, toda la fila cambia de color */
+    .dt-container table.dataTable tbody tr:hover > td {
+        @apply bg-au-cream;
+    }
+
+    /* Paginación */
+    .dt-container .dt-paging {
+        @apply flex flex-wrap items-center justify-center gap-1 sm:justify-end;
+    }
+
+    .dt-container .dt-paging .dt-paging-button {
+        @apply rounded-lg border border-au-cream-border bg-au-cream px-3.5 py-2
+               text-sm text-au-brown-darkest transition-all;
+    }
+
+    .dt-container .dt-paging .dt-paging-button:hover:not(.disabled):not(.current) {
+        @apply bg-au-cream-card;
+    }
+
+    .dt-container .dt-paging .dt-paging-button.current {
+        @apply border-au-coral bg-au-coral text-au-cream-card;
+    }
+
+    .dt-container .dt-paging .dt-paging-button.disabled {
+        @apply cursor-not-allowed opacity-40;
+    }
+
+    /* Texto "Mostrando X de Y" */
+    .dt-container .dt-info {
+        @apply text-center text-au-text-muted sm:text-left;
+    }
+}
+
+#tablePrins {
+    visibility: hidden;
+    width: 100% !important;
+}
+
+/* Mostrar la tabla cuando DataTables termine */
+#tablePrins.dt-inicializada {
+    visibility: visible;
 }
