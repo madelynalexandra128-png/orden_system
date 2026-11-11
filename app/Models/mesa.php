@@ -24,7 +24,7 @@ class mesa extends Model
     }
 
     public function factura(){
-        return $this->hasMany(factura::class);
+        return $this->hasMany(factura::class, 'idMesa', 'id');
     }
 
 

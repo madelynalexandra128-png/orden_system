@@ -25,6 +25,48 @@
             </span>
         </a>
 
+
+
+        {{-- barra --}}
+
+        <a href="{{ route ('barra.index') }}"
+        class="mb-2 flex items-center gap-3 px-3 py-2.5 rounded-lg capitalize transition-all 
+        {{ request()->routeIs('barra.index')
+                                ?
+                                ' bg-au-cream-card text-au-coral-text'
+                            :  
+                                'text-au-cream hover:bg-au-text-muted'}}" >
+        <x-lucide-tags class="w-6 h-6"/>
+
+            <span x-show="sidebarOpen" x-transition>
+                Barra
+            </span>
+        </a>
+
+
+        {{-- servicio --}}
+
+        <a href="{{ route('servicio.index') }}"
+            class="mb-2 flex items-center gap-3 px-3 py-2.5 rounded-lg capitalize transition-all 
+                {{ request()->routeIs('servicio.index') 
+                            ?
+                                ' bg-au-cream-card text-au-coral-text'
+                            :  
+                                'text-au-cream hover:bg-au-text-muted'}}">
+            
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7.5L12 3l8 4.5v9L12 21l-8-4.5v-9z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7.5l8 4.5 8-4.5"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 12v9"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.5 5l8 4.5"/>
+            </svg>
+
+            <span x-show="sidebarOpen" x-transition>
+                Servicio
+            </span>
+                    
+        </a>
+
         {{-- categorias --}}
 
         <a href="{{ route ('categoria.index') }}"

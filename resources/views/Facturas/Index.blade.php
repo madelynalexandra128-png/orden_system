@@ -76,7 +76,9 @@
                     <tr class="{{ $loop->even ? 'bg-au-cream-card': 'bg-white' }} border-t border-au-cream-border"> {{--  EL $LOOP->EVEN  es si en nuemro es par este color si no el siguiente  --}} 
                         <td class="p-3 text-sm text-au-text-muted">{{ $loop->iteration }}</td>{{-- nuemero  de vuelta enpieza en uno  --}}
                         <td class="p-3 text-sm text-au-text-muted">
-                            <div class="font-medium text-gray-800">{{ $factura->cliente->nombre }}</div>
+                            <div class="font-medium text-gray-800">
+                                {{ $factura->cliente?->nombre ?? 'Cliente no registrado' }}
+                            </div>
                         </td>
                         <td class="p-3 text-sm text-au-text-muted">{{ $factura->mesa->nombre }}</td>
                         <td class="p-3 text-sm text-au-text-muted">{{ $factura->metodoPago }}</td>
