@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Http\Controllers\MesaController;
+
 use App\Models\mesa;
 
 class MesaRepository{
@@ -15,7 +15,7 @@ class MesaRepository{
 
     public function guardarMesas(array $datos)
     {
-        mesa::create($datos);
+        return mesa::create($datos);
     }
 
     public function budcarIdMesa(int $id)

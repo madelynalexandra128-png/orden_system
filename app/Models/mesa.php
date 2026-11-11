@@ -15,7 +15,21 @@ class mesa extends Model
         'codigoQr'
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'capacidad' => 'integer',
+            'escaneosActivos' => 'integer',
+        ];
+    }
+
     public function factura(){
         return $this->hasMany(factura::class);
+    }
+
+
+    public function accesosQr()
+    {
+        return $this->hasMany(AccesoQr::class, 'idMesa');
     }
 }

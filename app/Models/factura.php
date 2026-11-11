@@ -14,7 +14,10 @@ class factura extends Model
         'metodoPago',
         'estado',
         'fecha',
-        'total'
+        'total',
+        'montoEfectivo',
+        'montoTarjeta',
+        'montoTransferencia'
     ];
 
     public function cliente(){

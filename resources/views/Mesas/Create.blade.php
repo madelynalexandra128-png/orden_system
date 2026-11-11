@@ -22,20 +22,7 @@
             <form action ="{{ route('mesa.store') }} "method='POST' enctype="multipart/form-data">
                 @csrf
 
-                <div class="mb-6">
-
-                    <label for ="nombre" class="block text-ms font-semibold text-au-brown-darkest mb-2">
-                        Nombre de la mesa
-                    </label>
-
-    
-                    <input 
-                        type="text" 
-                        id="nombre" 
-                        name="nombre"
-                        class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
-                </div>
-
+                
 
                 <div class="w-1/2">
                         
@@ -49,34 +36,6 @@
                             name="capacidad" 
                             class="w-full pl-6 pr-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral"
                             >
-                </div>
-
-                <div class="mb-6">
-
-                    <label for ="estado" class="block text-ms font-semibold text-au-brown-darkest mb-2">
-                        Estado
-                    </label>
-
-    
-                    <input 
-                        type="text" 
-                        id="estado" 
-                        name="estado"
-                        class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
-                </div>
-
-                <div class="mb-6">
-
-                    <label for ="nombre" class="block text-ms font-semibold text-au-brown-darkest mb-2">
-                        QR
-                    </label>
-
-    
-                    <input 
-                        type="text" 
-                        id="codigoQr" 
-                        name="codigoQr"
-                        class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest placeholder-au-text-muted focus:outline-none focus:ring-2 focus:ring-au-coral">
                 </div>
 
                 <hr class="border-au-cream-border mb-6">

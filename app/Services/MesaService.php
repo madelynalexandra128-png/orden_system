@@ -21,7 +21,21 @@ class MesaService{
 
     public function guardarMesas(array $datos)
     {
-        return $this->mesaRepository->guardarMesas($datos);
+        // Primero se guarda para que Laravel genere el ID.
+        $mesa = $this->mesaRepository->guardarMesas([
+            'nombre' => 'Mesa temporal',
+            'capacidad' => $datos['capacidad'],
+            'estado' => 'Disponible',
+            'codigoQr' => 'pendiente',
+        ]);
+
+        // Con el ID creado se forma el nombre y código definitivos.
+        $mesa->update([
+            'nombre' => 'Mesa ' . $mesa->id,
+            'codigoQr' => 'MESA-' . $mesa->id,
+        ]);
+
+        return $mesa;
     }
 
     public function budcarIdMesa(int $id){

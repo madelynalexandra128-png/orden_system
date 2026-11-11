@@ -48,6 +48,14 @@ class ProductoRespository{
     public function contarActivo(){
         return producto::where('estado',true)->count();
     }
+
+    public function listarProductosDisponibles()
+    {
+        return producto::with('categoria')
+            ->where('estado', 1)
+            ->where('stock', '>', 0)
+            ->get();
+    }
 }
 
 

@@ -3,6 +3,22 @@
     <form action="{{ route('factura.store') }}" method="POST" class="w-full">
 
         @csrf
+        {{-- Mostrar errores de validación --}}
+            @if ($errors->any())
+                <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+
+                    <p class="mb-2 font-semibold">
+                        No se pudo guardar la factura:
+                    </p>
+
+                    <ul class="list-disc space-y-1 pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+
+                </div>
+            @endif
 
         <div class="w-full grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] gap-6 items-start">
 
@@ -70,15 +86,6 @@
                         </select>
                     </div>
 
-                    <div class="col-span-2">
-                        <label for="fecha" class="block text-sm font-semibold text-au-brown-darkest mb-2">
-                            Fecha
-                        </label>
-
-                        <input type="date" id="fecha" name="fecha"
-                            class="w-full px-4 py-2.5 rounded-lg bg-au-cream border border-au-cream-border text-sm text-au-brown-darkest focus:outline-none focus:ring-2 focus:ring-au-coral">
-                    </div>
-
                 </div>
 
                 {{-- Método de pago --}}
@@ -113,7 +120,7 @@
                     </div>
 
                 {{-- CAMPOS DE PAGO --}}
-                    @if ($metodoPago === 'Efectivo')
+                    @if ($metodoPago == 'Efectivo')
 
                         <div class="mt-3 rounded-lg bg-au-cream p-3 text-sm text-au-brown-darkest space-y-2">
 
@@ -137,7 +144,7 @@
 
                         </div>
 
-                    @elseif ($metodoPago === 'Mixto')
+                    @elseif ($metodoPago == 'Mixto')
 
                         <div class="mt-3 rounded-lg bg-au-cream p-3 text-sm text-au-brown-darkest space-y-3">
 
@@ -166,7 +173,7 @@
                                 </select>
                             </div>
 
-                            @if ($metodoMixto === 'Tarjeta')
+                            @if ($metodoMixto == 'Tarjeta')
 
                                 <div class="flex items-center justify-between gap-3">
                                     <span>Monto recibido por tarjeta</span>
@@ -204,8 +211,6 @@
                         </div>
 
                     @endif
-
-                    </div>
 
                 </div>
 
@@ -261,15 +266,21 @@
 
                             <span class="absolute left-3 text-2xl text-au-coral-text font-semibold">$</span>
 
-                            <input
-                                type="text"
-                                id="total"
-                                name="total"
-                                value="{{ number_format($totalFactura, 0, ',', '.') }}"
-                                readonly
-                                class="w-44 pl-8 pr-2 py-1 bg-transparent text-right text-3xl font-extrabold text-au-brown-darkest focus:outline-none"
-                            >
+                            {{-- Total visible para el usuario --}}
+                        <input
+                            type="text"
+                            id="total"
+                            value="{{ number_format($totalFactura, 0, ',', '.') }}"
+                            readonly
+                            class="w-44 pl-8 pr-2 py-1 bg-transparent text-right text-3xl font-extrabold text-au-brown-darkest focus:outline-none"
+                        >
 
+                        {{-- Total enviado al controlador --}}
+                        <input
+                            type="hidden"
+                            name="total"
+                            value="{{ $totalFactura }}"
+                        >
                         </div>
 
                     </div>

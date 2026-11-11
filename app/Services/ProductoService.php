@@ -108,4 +108,9 @@ class ProductoService{
 
     }
 
+    public function listarProductosDisponibles()
+    {
+        return $this->productorespository->listarProductosDisponibles();
+    }
+
 }

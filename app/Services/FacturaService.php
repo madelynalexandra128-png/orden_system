@@ -23,6 +23,13 @@ class FacturaService{
         return $this->facturaRepository->guardarFactura($datos);
     }
 
+
+    public function guardarPedidoPendiente(array $datos)
+    {
+        return $this->facturaRepository->guardarPedidoPendiente($datos);
+    }
+
+
     public function buscasrIdFactura(int $id)
     {
         return $this->facturaRepository->buscasrIdFactura($id);

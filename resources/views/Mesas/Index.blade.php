@@ -73,7 +73,16 @@
                         </td>
                         <td class="p-3 text-sm text-au-text-muted">{{ $mesa->capacidad }}</td>
                         <td class="p-3 text-sm text-au-text-muted">{{ $mesa->estado }}</td>
-                        <td class="p-3 text-sm text-au-text-muted">{{ $mesa->codigoQr }}</td>
+                        <td class="p-3">
+                            <button
+                                type="button"
+                                onclick="Livewire.dispatch('abrir-qr', { mesaId: {{ $mesa->id }} })"
+                                class="p-1 text-au-text-muted hover:text-au-coral"
+                                title="Ver código QR"
+                            >
+                                <i class="fa-regular fa-eye text-lg"></i>
+                            </button>
+                        </td>
                         
                         <td class="p-3">
 
@@ -105,5 +114,7 @@
     </div> 
 
 </main>
+
+@livewire('mesa-qr-modal')
 
 @endsection

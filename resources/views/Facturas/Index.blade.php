@@ -88,6 +88,11 @@
 
                             <div class="flex justify-center text-au-text-muted items-center gap-2 ">
 
+                                <livewire:ver-factura
+                                    :id-factura="$factura->id"
+                                    :key="'ver-factura-'.$factura->id"
+                                />
+
                                 <a href="{{ route('factura.edit',$factura->id) }}">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>

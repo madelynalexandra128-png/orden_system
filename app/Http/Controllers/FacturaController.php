@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GuardarFacturaRequest;
 use App\Models\factura;
 use App\Services\ClienteService;
 use App\Services\FacturaService;
@@ -44,10 +45,13 @@ class FacturaController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(GuardarFacturaRequest $request)
     {
-        $this->facturaService->guardarFactura($request->all());
-        return redirect()->route('factura.index');
+        $this->facturaService->guardarFactura($request->validated());
+
+        return redirect()
+            ->route('factura.index')
+            ->with('success', 'Factura guardada correctamente.');
     }
 
     
