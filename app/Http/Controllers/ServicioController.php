@@ -26,16 +26,19 @@ class ServicioController extends Controller
         ));
     }
 
-    public function cambiarEstado(int $idFactura)
+    public function entregarProducto(int $idFactura, int $idDetalle)
     {
-        $resultado = $this->servicioService->cambiarAEntregado($idFactura);
+        $resultado = $this->servicioService->entregarProducto(
+            $idFactura,
+            $idDetalle
+        );
 
         if (!$resultado) {
             return redirect()->route('servicio.index')
-                ->with('error', 'Este pedido ya no está listo para entregar.');
+                ->with('error', 'No se pudo registrar la entrega del producto.');
         }
 
         return redirect()->route('servicio.index')
-            ->with('success', 'El pedido fue entregado correctamente.');
+            ->with('success', 'Producto marcado como entregado.');
     }
 }

@@ -44,4 +44,18 @@ class FacturaService{
     {
         return $this->facturaRepository->eliminarFactura($id);
     }
+
+
+    
+    public function registrarPago(int $idFactura, array $datos)
+    {
+        return $this->facturaRepository->registrarPago($idFactura, $datos);
+    }
+
+    public function registrarPagoMesa(int $idMesa, array $datos)
+    {
+        return $this->facturaRepository->registrarPagoMesa($idMesa,$datos);
+    }
+
+
 }

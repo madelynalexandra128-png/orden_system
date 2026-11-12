@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarraController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClienteAccesoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\HomeController;
@@ -63,8 +64,18 @@ Route::patch('/barra/{idFactura}/listo', [BarraController::class, 'cambiarAListo
     ->name('barra.listo');
 
 //servicio
+
 Route::get('/servicio', [ServicioController::class, 'index'])
     ->name('servicio.index');
 
-Route::patch('/servicio/{idFactura}/entregar', [ServicioController::class, 'cambiarEstado'])
-    ->name('servicio.entregar');
+
+
+// Acceso de clientes por cédula
+Route::get('/acceso-cliente/{codigoQr}', [ClienteAccesoController::class, 'formulario'])
+    ->name('cliente.login');
+
+Route::post('/acceso-cliente/{codigoQr}', [ClienteAccesoController::class, 'iniciarSesion'])
+    ->name('cliente.login.procesar');
+
+Route::post('/cerrar-sesion-cliente', [ClienteAccesoController::class, 'cerrarSesion'])
+    ->name('cliente.logout');

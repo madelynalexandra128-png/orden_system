@@ -24,6 +24,8 @@ class Menu extends Component
     // Mostrar u ocultar el resumen
     public $mostrarResumen = false;
 
+    
+
     public function mount(string $codigoQr)
     {
         $menuQrService = app(MenuQrService::class);

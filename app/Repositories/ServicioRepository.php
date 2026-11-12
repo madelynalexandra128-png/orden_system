@@ -3,10 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\factura;
+use Illuminate\Support\Facades\DB;
+
 
 class ServicioRepository
 {
-    // Listar los pedidos que están listos para entregar
     // Pedidos listos para entregar
     public function listarPedidosListos()
     {
@@ -19,7 +20,7 @@ class ServicioRepository
         ->get();
     }
 
-    // Pedidos que ya fueron entregados y esperan el pago
+    // Pedidos completamente entregados
     public function listarPedidosEntregados()
     {
         return factura::with([
@@ -31,19 +32,55 @@ class ServicioRepository
         ->get();
     }
 
-    // Marcar pedido como entregado
-    public function cambiarAEntregado(int $idFactura)
+    // Registrar la entrega de una unidad de producto
+    public function entregarProducto(int $idFactura, int $idDetalle)
     {
-        $factura = factura::findOrFail($idFactura);
+        return DB::transaction(function () use ($idFactura, $idDetalle) {
 
-        if ($factura->estado !== 'Listo') {
-            return false;
-        }
+            $factura = factura::where('id', $idFactura)
+                ->lockForUpdate()
+                ->firstOrFail();
 
-        $factura->update([
-            'estado' => 'Entregado'
-        ]);
+            if ($factura->estado !== 'Listo') {
+                return false;
+            }
 
-        return true;
+            $detalle = $factura->detalleFactura()
+                ->where('id', $idDetalle)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($detalle->cantidadEntregada >= $detalle->cantidad) {
+                return false;
+            }
+
+            // Entregar una unidad
+            $detalle->increment('cantidadEntregada');
+
+            // Comprobar si todos los productos fueron entregados
+            $todosEntregados = !$factura->detalleFactura()
+                ->whereColumn('cantidadEntregada', '<', 'cantidad')
+                ->exists();
+
+            if ($todosEntregados) {
+                $factura->update([
+                    'estado' => 'Entregado'
+                ]);
+            }
+
+            return true;
+        });
     }
+
+
+    public function listarPedidosEntregadosPorMesa(int $idMesa)
+    {
+        return factura::with(['mesa', 'detalleFactura.producto'])
+            ->where('idMesa', $idMesa)
+            ->where('estado', 'Entregado')
+            ->orderBy('created_at', 'asc')
+            ->get();
+    }
+
+
 }

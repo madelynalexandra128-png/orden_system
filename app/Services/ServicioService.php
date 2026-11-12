@@ -13,7 +13,6 @@ class ServicioService
         $this->servicioRepository = $servicioRepository;
     }
 
-    // Consultar los pedidos
     public function listarPedidosListos()
     {
         return $this->servicioRepository->listarPedidosListos();
@@ -24,8 +23,18 @@ class ServicioService
         return $this->servicioRepository->listarPedidosEntregados();
     }
 
-    public function cambiarAEntregado(int $idFactura)
+    public function entregarProducto(int $idFactura, int $idDetalle)
     {
-        return $this->servicioRepository->cambiarAEntregado($idFactura);
+        return $this->servicioRepository->entregarProducto(
+            $idFactura,
+            $idDetalle
+        );
     }
+
+
+    public function listarPedidosEntregadosPorMesa(int $idMesa)
+    {
+        return $this->servicioRepository->listarPedidosEntregadosPorMesa($idMesa);
+    }
+
 }
