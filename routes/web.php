@@ -11,7 +11,13 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+
+
+Route::middleware('auth')->group(function () {
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/menu/{codigoQr}', [MenuQrController::class, 'inicio'])
     ->name('menu.inicio');
@@ -24,7 +30,7 @@ Route::post('/categoria/cambiarEstado/{id}',[CategoriaController::class, 'cambia
 Route::resource('/producto',ProductoController::class);
 Route::post('/producto/cambiarEstadoProducto/{id}',[ProductoController::class,'cambiarEstadoProducto'])->name('producto.canbiarEstadoProducto');
 
-//cliente 
+//cliente
 Route::resource('/cliente',ClienteController::class);
 
 //mesas
@@ -68,3 +74,6 @@ Route::get('/servicio', [ServicioController::class, 'index'])
 
 Route::patch('/servicio/{idFactura}/entregar', [ServicioController::class, 'cambiarEstado'])
     ->name('servicio.entregar');
+
+
+});

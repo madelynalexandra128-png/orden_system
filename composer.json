@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "*",
         "simplesoftwareio/simple-qrcode": "*",
+        "spatie/laravel-permission": "*",
         "technikermathe/blade-lucide-icons": "*"
     },
     "require-dev": {
