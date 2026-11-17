@@ -148,7 +148,7 @@ class FacturaRepository {
                 'montoTransferencia' => $montoTransferencia
             ]);
 
-            // Guardar los detalles y descontar el inventario
+           // Guardar los detalles y descontar el inventario
             foreach ($detalles as $detalle) {
 
                 $factura->detalleFactura()->create([
@@ -158,10 +158,19 @@ class FacturaRepository {
                     'total' => $detalle['total']
                 ]);
 
-                $detalle['producto']->decrement(
-                    'stock',
-                    $detalle['cantidad']
-                );
+                // Descontar existencias
+                $producto = $detalle['producto'];
+
+                $producto->decrement('stock', $detalle['cantidad']);
+
+                // Actualizar el estado según las existencias
+                $producto->refresh();
+
+                if ($producto->stock <= 5) {
+                    $producto->update([
+                        'estado' => false
+                    ]);
+                }
             }
 
             return $factura;
@@ -242,10 +251,19 @@ class FacturaRepository {
                     'total' => $detalle['total']
                 ]);
 
-                $detalle['producto']->decrement(
-                    'stock',
-                    $detalle['cantidad']
-                );
+                // Descontar existencias
+                $producto = $detalle['producto'];
+
+                $producto->decrement('stock', $detalle['cantidad']);
+
+                // Actualizar el estado según las existencias
+                $producto->refresh();
+
+                if ($producto->stock <= 5) {
+                    $producto->update([
+                        'estado' => false
+                    ]);
+                }
             }
 
             return $factura;

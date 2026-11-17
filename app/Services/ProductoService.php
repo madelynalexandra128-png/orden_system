@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\ProductoRespository;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
 
 class ProductoService{
 
@@ -77,15 +78,6 @@ class ProductoService{
         return $this->productorespository->cambiarEstadoProducto($id);
     }
 
-    public function eliminarProducto(int $id){
-        $producto = $this->productorespository->buscarIdProducto($id);
-
-            if ($producto->imagen) {
-            Storage::disk('public')->delete($producto->imagen);
-            }
-        return $this->productorespository->eliminarProducto($id);
-
-    }
 
     public function contarActivo(){
         return $this->productorespository->contarActivo();
@@ -113,7 +105,7 @@ class ProductoService{
         return $this->productorespository->listarProductosDisponibles();
     }
 
-        public function agregarStock(int $id, int $cantidad)
+    public function agregarStock(int $id, int $cantidad)
     {
         if ($cantidad <= 0) {
             throw new \InvalidArgumentException(
@@ -122,5 +114,29 @@ class ProductoService{
         }
 
         return $this->productorespository->agregarStock($id, $cantidad);
+    }
+
+    public function eliminarProducto(int $id)
+    {
+        $producto = $this->productorespository->buscarIdProducto($id);
+
+        try {
+
+            $this->productorespository->eliminarProducto($id);
+
+            if ($producto->imagen) {
+                Storage::disk('public')->delete($producto->imagen);
+            }
+
+            return true;
+
+        } catch (QueryException $e) {
+
+            if ($e->getCode() == 23000) {
+                return false;
+            }
+
+            throw $e;
+        }
     }
 }

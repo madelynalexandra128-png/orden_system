@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Repositories\MesaRepository;
+use Illuminate\Database\QueryException;
 
 class MesaService{
 
@@ -50,6 +51,16 @@ class MesaService{
 
     public function eliminarMesa(int $id)
     {
-        return $this->mesaRepository->eliminarMesa($id);
+        try {
+            return $this->mesaRepository->eliminarMesa($id);
+
+        } catch (QueryException $e) {
+
+            if ($e->getCode() == 23000) {
+                return false;
+            }
+
+            throw $e;
+        }
     }
 }

@@ -12,17 +12,38 @@
         </p>
     </div>
 
-    {{-- Mensajes --}}
-    @if (session()->has('success'))
-        <div class="mb-4 rounded-lg bg-green-100 p-3 text-green-800">
-            {{ session('success') }}
-        </div>
-    @endif
+    {{-- notificaciones --}}
 
-    @if (session()->has('error'))
-        <div class="mb-4 rounded-lg bg-red-100 p-3 text-red-800">
-            {{ session('error') }}
+    @if(session('success') || session('error'))
+
+        <div id="notificacion"
+            class="fixed top-5 right-5 z-50 px-5 py-4 rounded-xl shadow-lg
+            flex items-center gap-3 min-width: 300px
+            {{ session('success') ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300' }}">
+
+            @if(session('success'))
+                <i class="fa-solid fa-circle-check text-xl"></i>
+                <span>{{ session('success') }}</span>
+            @else
+                <i class="fa-solid fa-circle-exclamation text-xl"></i>
+                <span>{{ session('error') }}</span>
+            @endif
+
         </div>
+
+        <script>
+            setTimeout(() => {
+                const notificacion = document.getElementById('notificacion');
+
+                if (notificacion) {
+                    notificacion.style.transition = 'opacity 0.5s ease';
+                    notificacion.style.opacity = '0';
+
+                    setTimeout(() => notificacion.remove(), 500);
+                }
+            }, 3000);
+        </script>
+
     @endif
 
     <div class="grid grid-cols-1 items-start gap-5 lg:grid-cols-2">

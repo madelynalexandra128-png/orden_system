@@ -23,10 +23,6 @@ class CategoriaRepository{
         $categorias->update($datos);
     }
 
-    public function eliminar(int $id){
-        categoria::destroy($id);
-    }
-
     public function cambiar(int $id){
         $categoria=categoria::findOrFail($id);
 
@@ -64,5 +60,16 @@ class CategoriaRepository{
 
     public function contarActivo(){
         return categoria::where('estado',true)->count();
+    }
+
+    public function eliminar(int $id)
+    {
+        $categoria = categoria::findOrFail($id);
+
+        if ($categoria->producto()->exists()) {
+            return 'No se puede eliminar la categoría porque tiene productos asociados.';
+        }
+
+        return $categoria->delete();
     }
 }

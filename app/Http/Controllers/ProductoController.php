@@ -97,8 +97,16 @@ class ProductoController extends Controller
 
     public function destroy(int $id)
     {
-        $this->productoService->eliminarProducto($id);
+        $eliminado = $this->productoService->eliminarProducto($id);
 
-        return redirect()->route('producto.index');
+        if (!$eliminado) {
+            return redirect()
+                ->route('producto.index')
+                ->with('error', 'No se puede eliminar este producto porque está asociado a una factura.');
+        }
+
+        return redirect()
+            ->route('producto.index')
+            ->with('success', 'Producto eliminado correctamente.');
     }
 }

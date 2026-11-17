@@ -16,15 +16,36 @@
     
     </div>
 
-    @if(session('success'))
+    {{-- Notificaciones --}}
+@if(session('success') || session('error'))
+    <div id="notificacion"
+        class="fixed top-5 right-5 z-50 px-5 py-4 rounded-xl shadow-lg
+        flex items-center gap-3 min-width: 300px
+        {{ session('success') ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300' }}">
 
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        @if(session('success'))
+            <i class="fa-solid fa-circle-check text-xl"></i>
+            <span>{{ session('success') }}</span>
+        @else
+            <i class="fa-solid fa-circle-exclamation text-xl"></i>
+            <span>{{ session('error') }}</span>
+        @endif
 
-            {{ session('success') }}
+    </div>
 
-        </div>
+    <script>
+        setTimeout(() => {
+            const notificacion = document.getElementById('notificacion');
 
-    @endif
+            if (notificacion) {
+                notificacion.style.transition = 'opacity 0.5s ease';
+                notificacion.style.opacity = '0';
+
+                setTimeout(() => notificacion.remove(), 500);
+            }
+        }, 3000);
+    </script>
+@endif
 
 
     {{-- table --}}

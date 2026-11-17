@@ -23,12 +23,12 @@
 
         <div class="mt-7 space-y-3">
 
-            <a
+        {{-- <a
                 href="{{ route('cliente.create') }}"
                 class="block w-full rounded-lg bg-au-brown-dark px-4 py-3 font-medium text-white hover:opacity-90"
             >
                 Iniciar sesión
-            </a>
+        </a> --}}
 
             <a
                 href="{{ url('/menu/' . $mesa->codigoQr . '/productos') }}"

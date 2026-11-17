@@ -1,48 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use App\Models\cliente;
-use Illuminate\Http\Request;
-
-class ClienteAccesoController extends Controller
+return new class extends Migration
 {
-    public function formulario(string $codigoQr)
+    public function up(): void
     {
-        return view('Login.Index', compact('codigoQr'));
+        Schema::table('detalleFactura', function (Blueprint $table) {
+            $table->unsignedInteger('cantidadEntregada')
+                ->default(0)
+                ->after('cantidad');
+        });
     }
 
-    public function iniciarSesion(Request $request, string $codigoQr)
+    public function down(): void
     {
-        $request->validate([
-            'cedula' => ['required', 'string']
-        ], [
-            'cedula.required' => 'Debes ingresar tu número de cédula.'
-        ]);
-
-        $cliente = cliente::where('cedula', $request->cedula)->first();
-
-        if (!$cliente) {
-            return back()
-                ->withInput()
-                ->withErrors([
-                    'cedula' => 'No encontramos un cliente registrado con esa cédula.'
-                ]);
-        }
-
-        session([
-            'cliente_id' => $cliente->id
-        ]);
-
-        return redirect()->route('menu.inicio', [
-            'codigoQr' => $codigoQr
-        ]);
+        Schema::table('detalleFactura', function (Blueprint $table) {
+            $table->dropColumn('cantidadEntregada');
+        });
     }
-
-    public function cerrarSesion()
-    {
-        session()->forget('cliente_id');
-
-        return redirect()->route('home');
-    }
-}
+};

@@ -17,16 +17,15 @@
     </div>
 
     
+    <div class="flex items-center gap-4 ">
+    {{-- 
+    <div class="flex items-center gap-4 "> 
 
-    <div class="flex items-center gap-4 "> {{-- agregar elementos  --}}
-
-        {{-- campana --}}
         <button class="relative">
             <i class="fa-regular fa-bell text-au-text-muted text-lg"></i>
             <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-au-coral rounded-full"></span>
         </button>
 
-        {{-- administrador --}}
         <div class="flex items-center gap-2"> 
         <div class="w-8 h-8 rounded-full bg-au-cream-card flex items-center justify-center text-au-brown-dark text-xs font-semibold">
             AD
@@ -38,7 +37,7 @@
 
         <i class="fa-solid fa-chevron-down text-xs text-au-text-muted"></i>
 
-    </div>
+    </div>--}}
 
     </div>
 

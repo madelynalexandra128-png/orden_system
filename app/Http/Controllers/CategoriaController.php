@@ -56,16 +56,27 @@ class CategoriaController extends Controller
         return redirect()->route('categoria.index')->with('success','actualizada  correctamente');#dirijir a la pegina principal 
     }
 
-    public function cambiar(int $id){
+    public function cambiar(int $id)
+    {
         $mensaje = $this->categoriaService->canbiar($id);
-        return redirect()->route('categoria.index')->with('success', $mensaje); 
+
+        $tipo = str_contains($mensaje, 'desactivada') ? 'error' : 'success';
+
+        return redirect()->route('categoria.index')
+            ->with($tipo, $mensaje);
     }
 
     
     public function destroy(int $id)
     {
-        $this ->categoriaService->eliminar($id);
+        $mensaje = $this->categoriaService->eliminar($id);
 
-        return redirect()->route('categoria.index')->with('success', 'eliminada correctamente');
+        if (is_string($mensaje)) {
+            return redirect()->route('categoria.index')
+                ->with('error', $mensaje);
+        }
+
+        return redirect()->route('categoria.index')
+            ->with('success', 'Categoría eliminada correctamente');
     }
 }

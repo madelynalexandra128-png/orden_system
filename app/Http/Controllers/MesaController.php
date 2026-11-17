@@ -8,7 +8,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
+use App\Http\Requests\MesaStoreRequest;
+use App\Http\Requests\MesaUpdateRequest;
 
 class MesaController extends Controller
 {
@@ -66,7 +67,7 @@ class MesaController extends Controller
     }
 
     
-    public function store(Request $request)
+    public function store(MesaStoreRequest $request)
     {
         $this->mesaService->guardarMesas($request->all());
 
@@ -88,16 +89,24 @@ class MesaController extends Controller
     }
 
     
-    public function update(int $id, Request $request)
+    public function update(int $id, MesaUpdateRequest $request)
     {
-        $this->mesaService->actualizarMesa($id, $request->all());
+        $this->mesaService->actualizarMesa($id, $request->validated());
         return redirect()->route('mesa.index');
     }
     
     public function destroy(int $id)
     {
-        $this->mesaService->eliminarMesa($id);
+        $eliminada = $this->mesaService->eliminarMesa($id);
 
-        return redirect()->route('mesa.index');
+        if (!$eliminada) {
+            return redirect()
+                ->route('mesa.index')
+                ->with('error', 'No se puede eliminar esta mesa porque tiene facturas asociadas.');
+        }
+
+        return redirect()
+            ->route('mesa.index')
+            ->with('success', 'Mesa eliminada correctamente.');
     }
 }

@@ -33,6 +33,8 @@ class MesaRepository{
 
     public function eliminarMesa(int $id)
     {
-        mesa::destroy($id);
+        $mesa = mesa::findOrFail($id);
+
+        return $mesa->delete();
     }
 }

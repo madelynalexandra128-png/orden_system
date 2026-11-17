@@ -19,7 +19,7 @@
                                 ' bg-au-cream-card text-au-coral-text'
                             :  
                                 'text-au-cream hover:bg-au-text-muted'}}">
-            <i class="fa-solid fa-grip w-4 text-center"></i>{{-- icono --}}
+            <i class="fa-solid fa-border-all"></i>{{-- icono --}}
             <span x-show="sidebarOpen" x-transition>
                 Home
             </span>
@@ -36,10 +36,10 @@
                                 ' bg-au-cream-card text-au-coral-text'
                             :  
                                 'text-au-cream hover:bg-au-text-muted'}}" >
-        <x-lucide-tags class="w-6 h-6"/>
+        <i class="fa-solid fa-kitchen-set"></i>
 
             <span x-show="sidebarOpen" x-transition>
-                Barra
+                Cocina
             </span>
         </a>
 
@@ -54,12 +54,7 @@
                             :  
                                 'text-au-cream hover:bg-au-text-muted'}}">
             
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7.5L12 3l8 4.5v9L12 21l-8-4.5v-9z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 7.5l8 4.5 8-4.5"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 12v9"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.5 5l8 4.5"/>
-            </svg>
+            <i class="fa-solid fa-clipboard-list"></i>
 
             <span x-show="sidebarOpen" x-transition>
                 Servicio
