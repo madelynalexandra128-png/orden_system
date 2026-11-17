@@ -4,6 +4,7 @@ use App\Http\Controllers\BarraController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteAccesoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuQrController;
@@ -23,7 +24,13 @@ Route::post('/categoria/cambiarEstado/{id}',[CategoriaController::class, 'cambia
 
 //producto
 Route::resource('/producto',ProductoController::class);
+
 Route::post('/producto/cambiarEstadoProducto/{id}',[ProductoController::class,'cambiarEstadoProducto'])->name('producto.canbiarEstadoProducto');
+
+Route::post(
+    '/producto/{id}/agregar-stock',
+    [ProductoController::class, 'agregarStock']
+)->name('producto.agregarStock');
 
 //cliente 
 Route::resource('/cliente',ClienteController::class);
@@ -68,14 +75,5 @@ Route::patch('/barra/{idFactura}/listo', [BarraController::class, 'cambiarAListo
 Route::get('/servicio', [ServicioController::class, 'index'])
     ->name('servicio.index');
 
-
-
-// Acceso de clientes por cédula
-Route::get('/acceso-cliente/{codigoQr}', [ClienteAccesoController::class, 'formulario'])
-    ->name('cliente.login');
-
-Route::post('/acceso-cliente/{codigoQr}', [ClienteAccesoController::class, 'iniciarSesion'])
-    ->name('cliente.login.procesar');
-
-Route::post('/cerrar-sesion-cliente', [ClienteAccesoController::class, 'cerrarSesion'])
-    ->name('cliente.logout');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');

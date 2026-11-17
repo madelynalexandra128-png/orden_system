@@ -56,6 +56,16 @@ class ProductoRespository{
             ->where('stock', '>', 0)
             ->get();
     }
+
+    
+    public function agregarStock(int $id, int $cantidad)
+    {
+        $producto = producto::findOrFail($id);
+
+        $producto->increment('stock', $cantidad);
+
+        return $producto;
+    }
 }
 
 

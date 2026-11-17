@@ -73,6 +73,22 @@ class ProductoController extends Controller
         return redirect()->route('producto.index');
     }
 
+    public function agregarStock(Request $request, int $id)
+    {
+        $datos = $request->validate([
+            'cantidad' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $this->productoService->agregarStock(
+            $id,
+            $datos['cantidad']
+        );
+
+        return redirect()
+            ->route('producto.index')
+            ->with('success', 'Stock agregado correctamente.');
+    }
+
     public function cambiarEstadoProducto(int $id){
         $mensaje = $this->productoService->cambiarEstadoProducto($id);
         return redirect()->route('producto.index')->with('success', $mensaje); 

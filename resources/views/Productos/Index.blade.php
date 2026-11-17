@@ -4,6 +4,9 @@
 @endsection
 
 @section('content')
+    @php
+        $mostrarModalStock = false;
+    @endphp
 
 <main class="flex-1 p-1 ">
     <h1 class="text-lg sm:text-xl font-semibold text-au-brown-darkest truncate">
@@ -136,22 +139,127 @@
                         </td>
                         <td class="p-3">
 
-                            <div class="flex justify-center text-au-text-muted items-center gap-2 ">
+                            <div class="flex justify-center items-center gap-3 text-au-text-muted">
 
-                                <a href="{{ route('producto.edit',$producto->id) }}">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </a>
+                            {{-- Añadir stock --}}
+                            <button
+                                type="button"
+                                onclick="document.getElementById('modalStock-{{ $producto->id }}').showModal()"
+                                title="Añadir stock"
+                                class="text-green-600 hover:text-green-800"
+                            >
+                                <i class="fa-solid fa-boxes-stacked text-lg"></i>
+                            </button>
 
-                                <form action="{{ route('producto.destroy',$producto->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900 p-1" title="Eliminar">
-                                        <i class="fa-regular fa-trash-can text-lg"></i>
+                            {{-- Editar --}}
+                            <a href="{{ route('producto.edit', $producto->id) }}"
+                            title="Editar">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+
+                            {{-- Eliminar --}}
+                            <form action="{{ route('producto.destroy', $producto->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit"
+                                        class="text-red-600 hover:text-red-900 p-1"
+                                        title="Eliminar">
+                                    <i class="fa-regular fa-trash-can text-lg"></i>
+                                </button>
+                            </form>
+
+                        </div>
+
+                        {{-- Modal para añadir stock --}}
+                        <dialog
+                            id="modalStock-{{ $producto->id }}"
+                            class="m-auto w-full max-w-md rounded-xl p-0 backdrop:bg-black/50"
+                        >
+                            <div class="bg-white p-6">
+
+                                <div class="flex items-center justify-between mb-5">
+                                    <h2 class="text-lg font-bold text-au-brown-darkest">
+                                        Añadir stock
+                                    </h2>
+
+                                    <button
+                                        type="button"
+                                        onclick="document.getElementById('modalStock-{{ $producto->id }}').close()"
+                                        class="text-au-text-muted hover:text-red-600 text-xl"
+                                    >
+                                        &times;
                                     </button>
-                                
+                                </div>
+
+                                <form action="{{ route('producto.agregarStock', $producto->id) }}"
+                                    method="POST">
+
+                                    @csrf
+
+                                    <div class="space-y-4">
+
+                                        <div>
+                                            <label class="block text-sm font-semibold text-au-brown-dark">
+                                                Producto
+                                            </label>
+
+                                            <p class="mt-1 text-au-text-muted">
+                                                {{ $producto->nombre }}
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm font-semibold text-au-brown-dark">
+                                                Stock actual
+                                            </label>
+
+                                            <p class="mt-1 text-au-text-muted">
+                                                {{ $producto->stock }} unidades
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm font-semibold text-au-brown-dark">
+                                                Cantidad que deseas añadir
+                                            </label>
+
+                                            <input
+                                                type="number"
+                                                name="cantidad"
+                                                min="1"
+                                                step="1"
+                                                required
+                                                class="mt-2 w-full rounded-lg border border-au-cream-border px-4 py-3 outline-none focus:border-au-coral"
+                                                placeholder="Ingresa la cantidad"
+                                            >
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mt-6 flex justify-end gap-3">
+
+                                        <button
+                                            type="button"
+                                            onclick="document.getElementById('modalStock-{{ $producto->id }}').close()"
+                                            class="rounded-lg border border-au-cream-border px-4 py-2 text-au-brown-dark"
+                                        >
+                                            Cancelar
+                                        </button>
+
+                                        <button
+                                            type="submit"
+                                            class="rounded-lg bg-au-text-muted px-5 py-2 font-semibold text-au-cream hover:opacity-90"
+                                        >
+                                            Añadir stock
+                                        </button>
+
+                                    </div>
+
                                 </form>
 
                             </div>
+                        </dialog>
                         </td>
                     </tr>
                     

@@ -113,4 +113,14 @@ class ProductoService{
         return $this->productorespository->listarProductosDisponibles();
     }
 
+        public function agregarStock(int $id, int $cantidad)
+    {
+        if ($cantidad <= 0) {
+            throw new \InvalidArgumentException(
+                'La cantidad debe ser mayor que cero.'
+            );
+        }
+
+        return $this->productorespository->agregarStock($id, $cantidad);
+    }
 }
