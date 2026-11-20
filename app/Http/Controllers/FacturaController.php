@@ -81,7 +81,8 @@ class FacturaController extends Controller
 
     public function destroy(int $id)
     {
-        $this->facturaService->eliminarFactura($id);
-        return redirect()->route('factura.index');
+        return redirect()
+            ->route('factura.index')
+            ->with('error', 'No se pueden eliminar las facturas. Los registros deben conservarse.');
     }
 }

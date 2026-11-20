@@ -120,8 +120,8 @@
 
                                 {{-- <a href="{{ route('factura.edit',$factura->id) }}">
                                     <i class="fa-regular fa-pen-to-square"></i>
-                                </a> --}}
-
+                                </a>
+                                
                                 <form action="{{ route('factura.destroy', $factura->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -130,6 +130,9 @@
                                     </button>
                                 
                                 </form>
+                                --}}
+
+                                
 
                             </div>
                         </td>

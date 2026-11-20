@@ -12,23 +12,87 @@
         @endphp
 
         {{-- Encabezado --}}
-        <header class="bg-au-brown-darkest px-5 py-8 text-center">
+        <header class="bg-[#F8F3EA] px-5 py-6 border-b border-[#E9DDCD]">
 
-            <h1 class="text-2xl font-bold text-white">
-                Arcadia Urbana Café Bar
-            </h1>
+        <div class="mx-auto max-w-6xl">
 
-            <p class="mt-2 text-sm text-au-cream">
-                MENÚ DIGITAL
-            </p>
+            <div class="flex items-center justify-between gap-4">
 
-            <div class="mt-4 inline-block rounded-full bg-au-coral px-5 py-2">
-                <span class="text-sm font-semibold text-white">
-                    {{ $mesa->nombre }}
-                </span>
+                {{-- Marca del sistema --}}
+                <div class="flex items-center gap-3">
+
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#76563E] shadow-md border border-[#A77B54]">
+                        <span class="text-lg font-extrabold tracking-wider text-[#F8F3EA]">
+                            SPQR
+                        </span>
+                    </div>
+
+                    <div>
+                        <h1 class="text-xl font-extrabold tracking-tight text-[#543D2D]">
+                            Orden <span class="text-[#A77B54]">System</span>
+                        </h1>
+
+                        <p class="text-[10px] font-semibold uppercase tracking-[3px] text-[#A18A74]">
+                            Menú digital
+                        </p>
+                    </div>
+
+                </div>
+
+                {{-- Mesa --}}
+                <div class="rounded-2xl border border-[#E7D8C5] bg-white px-4 py-3 text-center shadow-sm">
+
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-[#A18A74]">
+                        Tu mesa
+                    </p>
+
+                    <p class="mt-1 text-lg font-extrabold text-[#654936]">
+                        {{ $mesa->nombre }}
+                    </p>
+
+                </div>
+
             </div>
 
-        </header>
+            {{-- Personas conectadas --}}
+            <div class="mt-5 flex items-center justify-between rounded-2xl bg-[#EDE2D3] px-4 py-3">
+
+                <div class="flex items-center gap-3">
+
+                    <div class="flex h-9 w-9 items-center justify-center rounded-full bg-white">
+                        <i class="fa-solid fa-users text-[#806044]"></i>
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-bold text-[#654936]">
+                            Mesa compartida
+                        </p>
+
+                        <p class="text-xs text-[#927A64]">
+                            Personas conectadas al menú
+                        </p>
+                    </div>
+
+                </div>
+
+                <span class="rounded-full bg-[#76563E] px-3 py-1.5 text-sm font-bold text-white">
+                    {{ $cantidadEscaneos }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+        {{-- Mensaje de producto agregado --}}
+        <div
+            id="mensajeProducto"
+            class="fixed top-5 left-1/2 z-index: 100 hidden -translate-x-1/2 rounded-xl bg-[#6F8B65] px-5 py-3 text-sm font-semibold text-white shadow-lg"
+        >
+            <i class="fa-solid fa-check-circle mr-2"></i>
+            Producto agregado correctamente
+        </div>
 
         <main class="mx-auto max-w-5xl space-y-6 px-4 py-6">
 
@@ -260,8 +324,7 @@
 
                                     <div
                                         wire:key="pedido-{{ $idProducto }}"
-                                        class="flex items-center gap-3
-                                               border-b border-au-cream-border pb-4"
+                                        class="flex items-center gap-3 border-b border-au-cream-border pb-4"
                                     >
 
                                         {{-- Imagen del producto --}}
@@ -559,5 +622,21 @@
         </main>
 
     @endif
+
+    @script
+            <script>
+                $wire.on('producto-agregado', () => {
+                    const mensaje = document.getElementById('mensajeProducto');
+
+                    if (!mensaje) return;
+
+                    mensaje.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        mensaje.classList.add('hidden');
+                    }, 2500);
+                });
+            </script>
+    @endscript
 
 </div>

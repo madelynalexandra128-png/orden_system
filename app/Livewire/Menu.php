@@ -24,8 +24,6 @@ class Menu extends Component
     // Mostrar u ocultar el resumen
     public $mostrarResumen = false;
 
-    
-
     public function mount(string $codigoQr)
     {
         $menuQrService = app(MenuQrService::class);
@@ -75,6 +73,9 @@ class Menu extends Component
                 'cantidad' => 1
             ];
         }
+
+        // Notificar a la vista que se agregó un producto
+        $this->dispatch('producto-agregado');
     }
 
     // Eliminar un producto del pedido
@@ -150,9 +151,7 @@ class Menu extends Component
         // Limpiar el carrito
         $this->pedido = [];
         $this->mostrarResumen = false;
-}
-
-
+    }
 
     public function render()
     {
@@ -174,8 +173,14 @@ class Menu extends Component
             });
         }
 
+        // Contar accesos QR de la mesa
+        $cantidadEscaneos = AccesoQr::where('idMesa', $this->mesa->id)
+            ->whereIn('estado', ['activo', 'pedido'])
+            ->count();
+
         return view('livewire.menu', [
             'productosFiltrados' => $productos,
+            'cantidadEscaneos' => $cantidadEscaneos,
         ]);
     }
 }

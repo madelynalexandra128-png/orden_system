@@ -66,7 +66,7 @@
                 @forelse ($pedidosListos as $pedido)
 
                     <div wire:key="pedido-listo-{{ $pedido->id }}"
-                         class="rounded-xl border border-au-cream-border p-4">
+                        class="rounded-xl border border-au-cream-border p-4">
 
                         <div class="mb-3 flex items-center justify-between">
                             <h3 class="font-bold text-au-brown-dark">
@@ -102,7 +102,7 @@
                                             {{ $detalle->producto?->nombre ?? 'Producto no disponible' }}
                                         </p>
 
-                                        <p class="mt-1 text-xs text-au-text-muted">
+                                        <p class="mt-1 text-base font-semibold text-au-text-muted">
                                             Entregados:
                                             {{ $detalle->cantidadEntregada }}
                                             de

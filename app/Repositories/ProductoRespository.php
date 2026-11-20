@@ -7,7 +7,7 @@ class ProductoRespository{
 
 
     public function listarProductos(){
-        return producto::all();
+        return producto::orderBy('id', 'desc')->get();
     }
 
     public function guardarProductos(array $datos){
@@ -38,8 +38,8 @@ class ProductoRespository{
         } else {
 
             // Comprobar las existencias
-            if ($productos->stock <= 5) {
-                return "No se puede activar: el stock debe ser mayor a 5.";
+            if ($productos->stock <= 0) {
+                return "No se puede activar: el stock debe ser mayor a 0.";
             }
 
             // Comprobar el estado de la categoría

@@ -88,16 +88,15 @@ class ProductoService{
     {
         $categoria = $this->categoriaservice->buscarId($idCategoria);
 
-        if ($categoria->estado == 0){
+        if ($categoria->estado == 0) {
             return false;
         }
-        if ($stock <= 5) {
+
+        if ($stock <= 0) {
             return false;
-        } 
+        }
 
         return true;
-
-
     }
 
     public function listarProductosDisponibles()

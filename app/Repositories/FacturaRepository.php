@@ -14,7 +14,7 @@ class FacturaRepository {
 
     public function listarFacturas()
     {
-        $facturas = factura::all();
+        $facturas = factura::orderBy('id', 'desc')->get();
         return $facturas;
     }
 
@@ -166,7 +166,7 @@ class FacturaRepository {
                 // Actualizar el estado según las existencias
                 $producto->refresh();
 
-                if ($producto->stock <= 5) {
+                if ($producto->stock <= 0) {
                     $producto->update([
                         'estado' => false
                     ]);
@@ -259,7 +259,7 @@ class FacturaRepository {
                 // Actualizar el estado según las existencias
                 $producto->refresh();
 
-                if ($producto->stock <= 5) {
+                if ($producto->stock <= 0) {
                     $producto->update([
                         'estado' => false
                     ]);

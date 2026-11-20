@@ -8,7 +8,7 @@
                 Dashboard
             </h1>
             <p class="mt-1 text-sm text-au-text-muted">
-                Resumen general de Arcadia Urbana Café Bar
+                Resumen general de orden sistem
             </p>
         </div>
 

@@ -74,7 +74,9 @@
 
                         <input
                             type="number"
-                            min="0"
+                            min="{{ $totalPago }}"
+                            max="100000000"
+                            step="100"
                             wire:model.live="montoRecibido"
                             class="w-full rounded-lg border border-au-cream-border px-3 py-2 text-sm focus:border-au-coral focus:outline-none"
                             placeholder="Ingrese el valor recibido">
