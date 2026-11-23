@@ -147,8 +147,7 @@
                                 ' bg-au-cream-card text-au-coral-text'
                             :  
                                 'text-au-cream hover:bg-au-text-muted'}}">
-            
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            {{-- <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                 <circle cx="9" cy="8" r="3.5"/>
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.5v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1"/>
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.5 4.6a3.5 3.5 0 010 6.8"/>
@@ -156,7 +155,8 @@
                 </svg>
             <span x-show="sidebarOpen" x-transition>
                 cliente
-            </span>
+            </span> --}}
+            
                     
         </a>
     </nav>

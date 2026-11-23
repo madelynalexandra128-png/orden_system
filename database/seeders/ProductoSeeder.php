@@ -57,18 +57,16 @@ class ProductoSeeder extends Seeder
             ['nombre' => 'Combo Merienda', 'descripcion' => 'Jugo natural y sándwich', 'precio' => 16000, 'precioCompra' => 8000, 'stock' => 12, 'estado' => 1, 'puntos' => 16, 'imagen' => null, 'idCategoria' => 9],
 
             // SNACKS - idCategoria 10
-            ['nombre' => 'Papas Fritas', 'descripcion' => 'Porción de papas fritas', 'precio' => 7000, 'precioCompra' => 3000, 'stock' => 20, 'estado' => 1, 'puntos' => 7, 'imagen' => null, 'idCategoria' => 10],
+            
             ['nombre' => 'Nachos con Queso', 'descripcion' => 'Nachos acompañados de salsa de queso', 'precio' => 8000, 'precioCompra' => 3500, 'stock' => 15, 'estado' => 1, 'puntos' => 8, 'imagen' => null, 'idCategoria' => 10],
             ['nombre' => 'Galletas', 'descripcion' => 'Porción de galletas surtidas', 'precio' => 4000, 'precioCompra' => 1800, 'stock' => 20, 'estado' => 1, 'puntos' => 4, 'imagen' => null, 'idCategoria' => 10],
 
             // JUGOS NATURALES - idCategoria 11
             ['nombre' => 'Jugo de Mora', 'descripcion' => 'Jugo natural de mora en agua o leche', 'precio' => 7000, 'precioCompra' => 3000, 'stock' => 20, 'estado' => 1, 'puntos' => 7, 'imagen' => null, 'idCategoria' => 11],
-            ['nombre' => 'Jugo de Mango', 'descripcion' => 'Jugo natural de mango', 'precio' => 6500, 'precioCompra' => 2800, 'stock' => 20, 'estado' => 1, 'puntos' => 6, 'imagen' => null, 'idCategoria' => 11],
+            
             ['nombre' => 'Jugo de Fresa', 'descripcion' => 'Jugo natural de fresa', 'precio' => 7500, 'precioCompra' => 3200, 'stock' => 20, 'estado' => 1, 'puntos' => 7, 'imagen' => null, 'idCategoria' => 11],
 
             // AGUAS - idCategoria 12
-            ['nombre' => 'Agua sin Gas', 'descripcion' => 'Agua embotellada sin gas', 'precio' => 3000, 'precioCompra' => 1500, 'stock' => 30, 'estado' => 1, 'puntos' => 3, 'imagen' => null, 'idCategoria' => 12],
-            ['nombre' => 'Agua con Gas', 'descripcion' => 'Agua mineral con gas', 'precio' => 4000, 'precioCompra' => 2000, 'stock' => 25, 'estado' => 1, 'puntos' => 4, 'imagen' => null, 'idCategoria' => 12],
             ['nombre' => 'Agua Saborizada', 'descripcion' => 'Agua embotellada con sabor a frutas', 'precio' => 4500, 'precioCompra' => 2200, 'stock' => 20, 'estado' => 1, 'puntos' => 4, 'imagen' => null, 'idCategoria' => 12],
         ];
 

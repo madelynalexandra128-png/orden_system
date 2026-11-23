@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\factura;
 use Illuminate\Support\Facades\DB;
 
-
 class ServicioRepository
 {
     // Pedidos listos para entregar
@@ -72,15 +71,16 @@ class ServicioRepository
         });
     }
 
-
+    // Listar pedidos entregados por mesa
     public function listarPedidosEntregadosPorMesa(int $idMesa)
     {
-        return factura::with(['mesa', 'detalleFactura.producto'])
-            ->where('idMesa', $idMesa)
-            ->where('estado', 'Entregado')
-            ->orderBy('created_at', 'asc')
-            ->get();
+        return factura::with([
+            'mesa',
+            'detalleFactura.producto'
+        ])
+        ->where('idMesa', $idMesa)
+        ->where('estado', 'Entregado')
+        ->orderBy('created_at', 'asc')
+        ->get();
     }
-
-
 }
